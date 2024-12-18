@@ -1,5 +1,4 @@
 Three-Phase Development Roadmap
-This roadmap divides your project into three manageable phases, focusing on essential features first, while allowing room for gradual complexity. Each phase is designed with your skill level and time constraints in mind, ensuring steady progress.
 
 Phase 1: Core Features (4–5 Weeks)
 Goal: Build the foundation and basic functionality to get the website running.
