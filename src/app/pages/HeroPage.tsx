@@ -4,7 +4,16 @@
 
 export default function Hero() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
+    <div
+    className="min-h-screen flex items-center justify-center relative bg-cover bg-center"
+    style={{
+      backgroundImage: "url('/images/project-background.jpg')", 
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+  >
+    {/* Overlay for better contrast */}
+    <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       {/* Background pattern */}
       <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
       

@@ -26,10 +26,10 @@ export default function Header() {
           <Link href="/profile" className="text-white hover:text-gray-300">
             Profile
           </Link>
-          <Link href="/signup" className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+          <Link href="/auth/signup" className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
             Signup
           </Link>
-          <Link href="/login" className="px-4 py-2 text-sm font-medium text-white bg-emerald-500 rounded-lg hover:bg-green-700">
+          <Link href="/auth/login" className="px-4 py-2 text-sm font-medium text-white bg-emerald-500 rounded-lg hover:bg-green-700">
             Login
           </Link>
         </div>

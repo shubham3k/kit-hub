@@ -3,8 +3,7 @@ import  Hero  from './pages/HeroPage';
 import Headers  from './layout/Header';
 import Footer from './layout/Footer';
 import CommunityPage from './pages/CommunityPage';
-import EventsPage from './pages/EventsPage';
-import ClubsPage from './pages/ClubsPage';
+import EventsPage from './pages/Events-ClubsPage';
 import ProjectsPage from './pages/ProjectsPage';
 
 export default function Home() {
@@ -15,7 +14,6 @@ export default function Home() {
         <Hero />  
         <CommunityPage />
         <EventsPage />
-        <ClubsPage />
         <ProjectsPage />
         <Footer />    
     </main>
