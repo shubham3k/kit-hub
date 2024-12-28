@@ -1,62 +1,47 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { account, databases } from '../../lib/appwrite'
-import { useRouter } from 'next/navigation'
+import { useAuth } from '@/hooks/useAuth';
+import { redirect } from 'next/navigation';
+import { useEffect } from 'react';
 
-export default function Profile() {
-  const [user, setUser] = useState<any>(null)
-  const [bio, setBio] = useState('')
-  const router = useRouter()
+// export default function ProfilePage() {
+//   const { user, loading, logout } = useAuth();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const userData = await account.get()
-        setUser(userData)
-        // Fetch user profile from database
-        const profile = await databases.getDocument('YOUR_DATABASE_ID', 'profiles', userData.$id)
-        setBio(profile.bio)
-      } catch (error) {
-        console.error('Failed to fetch user', error)
-        router.push('/auth/login')
-      }
-    }
-    fetchUser()
-  }, [router])
+//   useEffect(() => {
+//     if (!loading && !user) {
+//       redirect('/auth/login');
+//     }
+//   }, [loading, user]);
 
-  const handleUpdateProfile = async (e: React.FormEvent) => {
-    e.preventDefault()
-    try {
-      await databases.updateDocument('YOUR_DATABASE_ID', 'profiles', user.$id, { bio })
-      alert('Profile updated successfully')
-    } catch (error) {
-      console.error('Failed to update profile', error)
-    }
-  }
+//   if (loading) {
+//     return <div>Loading...</div>;
+//   }
 
-  if (!user) return <div>Loading...</div>
+//   if (!user) {
+//     return null;
+//   }
 
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-2xl font-bold mb-4">Profile</h1>
-      <p>Name: {user.name}</p>
-      <p>Email: {user.email}</p>
-      <form onSubmit={handleUpdateProfile} className="w-full max-w-xs mt-4">
-        <textarea
-          placeholder="Bio"
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-          className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-        />
-        <button
-          type="submit"
-          className="w-full px-4 py-2 font-bold text-white bg-primary rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-        >
-          Update Profile
-        </button>
-      </form>
-    </div>
-  )
-}
-
+//   return (
+//     <div className="min-h-screen bg-gray-50 py-12 px-4">
+//       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow p-8">
+//         <div className="text-center">
+//           <div className="relative w-32 h-32 mx-auto mb-4">
+//             <img
+//               src={user.avatarUrl || '/images/default-avatar.png'}
+//               alt={user.name}
+//               className="rounded-full w-full h-full object-cover"
+//             />
+//           </div>
+//           <h1 className="text-2xl font-bold mb-2">{user.name}</h1>
+//           <p className="text-gray-600 mb-6">{user.email}</p>
+//           <button
+//             onClick={logout}
+//             className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+//           >
+//             Logout
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
