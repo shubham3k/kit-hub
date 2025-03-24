@@ -2,23 +2,23 @@
 
 import { useState } from 'react';
 import { Account } from 'appwrite';
-import { client } from '@/utils/appwriteClient'; // Make sure to import your Appwrite client setup
+import { client } from '@/utils/appwriteClient'; 
 import Link from 'next/link';
 import { BackgroundBeams } from '@/components/ui/background-beams';
+import { getLoggedInUser } from "@/lib/appwrite";
 
 const account = new Account(client);
 
+
 export default function SignupPage() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    fullName: '',
     email: '',
     password: '',
   });
 
   const [errors, setErrors] = useState({
-    firstName: '',
-    lastName: '',
+    fullName: '',
     email: '',
     password: '',
     general: '',
@@ -27,20 +27,14 @@ export default function SignupPage() {
   const validateForm = () => {
     let isValid = true;
     const newErrors = {
-      firstName: '',
-      lastName: '',
+      fullName: '',
       email: '',
       password: '',
       general: '',
     };
 
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = 'First name is required';
-      isValid = false;
-    }
-
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Last name is required';
+    if (!formData. fullName.trim()) {
+      newErrors. fullName = 'Full name name is required';
       isValid = false;
     }
 
@@ -72,7 +66,7 @@ export default function SignupPage() {
     }
 
     try {
-      const fullName = `${formData.firstName} ${formData.lastName}`;
+      const fullName = `${formData.fullName}`;
       await account.create(
         'unique()', // Generates a unique user ID
         formData.email,
@@ -106,7 +100,6 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-teal-800 py-12 px-4 sm:px-6 lg:px-8">
-      <BackgroundBeams />
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -124,44 +117,21 @@ export default function SignupPage() {
           <div className="rounded-md shadow-sm space-y-4">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                  First Name
+                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+                  Name
                 </label>
                 <input
-                  id="firstName"
-                  name="firstName"
+                  id="fullName"
+                  name="fullName"
                   type="text"
                   required
                   className={`mt-1 block w-full px-3 py-2 border ${
-                    errors.firstName ? 'border-red-300' : 'border-gray-300'
+                    errors.fullName ? 'border-red-300' : 'border-gray-300'
                   } rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500`}
-                  value={formData.firstName}
+                  value={formData.fullName}
                   onChange={handleChange}
                 />
-                {errors.firstName && (
-                  <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-                  Last Name
-                </label>
-                <input
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  required
-                  className={`mt-1 block w-full px-3 py-2 border ${
-                    errors.lastName ? 'border-red-300' : 'border-gray-300'
-                  } rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500`}
-                  value={formData.lastName}
-                  onChange={handleChange}
-                />
-                {errors.lastName && (
-                  <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>
-                )}
-              </div>
+                </div>
             </div>
 
             <div>
