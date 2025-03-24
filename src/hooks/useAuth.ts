@@ -5,10 +5,10 @@ import { User } from '@/types/user';
 
 // Initialize the Appwrite client
 const client = new Client()
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_HOST_URL || '') // Ensure valid endpoint
+    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT|| '') // Ensure valid endpoint
     .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID || ''); // Ensure valid project ID
 
-if (!process.env.NEXT_PUBLIC_APPWRITE_HOST_URL || !process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID) {
+if (!process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT || !process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID) {
     console.error('Appwrite environment variables are missing!');
 }
 
@@ -18,7 +18,7 @@ export const useAuth = () => {
     const signup = async (name: string, email: string, password: string) => {
       try {
         // Register user with Appwrite
-        await account.create('unique()', email, password, name);
+        await account.create('unique()', email, password);
       } catch (error) {
         console.error('Signup error:', error);
         throw error;
